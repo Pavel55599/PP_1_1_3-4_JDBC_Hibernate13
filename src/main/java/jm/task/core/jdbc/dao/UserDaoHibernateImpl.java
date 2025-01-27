@@ -6,13 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
+
 import java.util.List;
-//import static jm.task.core.jdbc.util.Util.sessionFactory;
 
-//import static jm.task.core.jdbc.util.Util.sessionFactory;
-
-//import static jm.task.core.jdbc.util.Util.sessionFactory;
 
 public class UserDaoHibernateImpl extends Util  implements UserDao {
     private SessionFactory sessionFactory;
@@ -83,7 +79,7 @@ public class UserDaoHibernateImpl extends Util  implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             User user = session.get(User.class, id);
-            if (user != null) {                                           //вот из за этой проверки намучался ппц
+            if (user != null) {                                           //вот из за этой проверки намучался
                 session.delete(user);
             }else {
                 System.out.println("пользователь не найден");
@@ -101,10 +97,10 @@ public class UserDaoHibernateImpl extends Util  implements UserDao {
     }
 
     @Override
-    public List<User> getAllUsers() {                                        //этому методу вообще не пойму че надо
+    public List<User> getAllUsers() {
         Transaction transaction = null;
-        try (Session session = Util.getSessionFactory().openSession()) {      //он все тесты валит
-            transaction = session.beginTransaction();                        //его тестить надо самым последним
+        try (Session session = Util.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();                          // тестить надо самым последним
             List<User> users = session.createQuery("from User").list();
             transaction.commit();
             return users;

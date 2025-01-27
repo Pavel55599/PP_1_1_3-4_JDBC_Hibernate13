@@ -18,8 +18,6 @@ import java.sql.ResultSet;         // Добавил Явный импорт
 
 public class UserDaoJDBCImpl extends Util implements UserDao {
 
-
-
     public UserDaoJDBCImpl() {
 
     }
